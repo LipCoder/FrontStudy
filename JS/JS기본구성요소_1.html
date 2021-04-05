@@ -1,60 +1,28 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>문자열 검색</title>
+        <script>
+            // ##07. 캡처 괄호를 사용해 문자열의 단어 교환하기
+            var name = "Abe Lincoln";
+            var re = /^(\w+)\s(\w+)$/;  // 입력값 시작과 끝, (모든 알파뱃 1자이상), 하나의 공백, (모든 알파뱃 1자이상)
+            var newname = name.replace(re, "$2, $1");
+            // ==> Lincoln, Abe
 
-        <style>
-            .found 
-            {
-                background-color : #ff0;
-            }
-        </style>
+            console.log(newname);
+
+            // ##08. HTML 태그를 명명된 엔티티로 치환하기
+            var pieceOfHtml = "<p>This is a <span>paragraph</span></p>";
+            pieceOfHtml = pieceOfHtml.replace(/</g, "&lt");
+            pieceOfHtml = pieceOfHtml.replace(/>/g, "&gt");
+            console.log(pieceOfHtml);
+
+            pieceOfHtml = pieceOfHtml.replace(/&lt/g, "<");
+            pieceOfHtml = pieceOfHtml.replace(/&gt/g, ">");
+            console.log(pieceOfHtml);
+        </script>
     </head>
 
     <body>
-        <form id="textsearch">
-            <textarea id="incoming" cols="150" rows="10">
-            </textarea>
-            <p>
-                Search pattern: <input id="pattern" type="text"/>
-            </p>
-        </form>
-        <button id="searchSubmit">Search for pattern</button>
-        <div id="searchResult"></div>
-
-        <script>
-            document.getElementById("searchSubmit").onclick=function() {
-
-                // 패턴 구하기(RegExp)
-                var pattern = document.getElementById("pattern").value;
-                var re = new RegExp(pattern, "g");
-
-                // 문자열 구하기
-                var searchString = document.getElementById("incoming").value;
-                var matchArray;
-                var resultString = "<pre>";
-                var first = 0;
-                var last = 0;
-
-                // 각각의 일치하는 부분 검색
-                while((matchArray = re.exec(searchString)) != null) {
-                    last = matchArray.index;
-
-                    // 일치하는 모든 문자열을 연결
-                    resultString += searchString.substring(first, last);
-
-                    // 일치하는 부분에 클래스 추가
-                    resultString += "<span class='found'>" + matchArray[0] + "</span>";
-                    first = re.lastIndex;
-                }
-
-                // 문자열 종료
-                resultString += searchString.substring(first, searchString.length);
-                resultString += "</pre>";
-
-                // 페이지로 삽입
-                document.getElementById("searchResult").innerHTML = resultString;
-            };
-        </script>
+        
     </body>
 </html>

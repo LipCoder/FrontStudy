@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>문자열 검색</title>
+
+        <style>
+            .found 
+            {
+                background-color : #ff0;
+            }
+        </style>
+    </head>
+
+    <body>
+        <form id="textsearch">
+            <textarea id="incoming" cols="100" rows="10">
+            </textarea>
+            <p>
+                Search pattern: <input id="pattern" type="text"/>
+            </p>
+        </form>
+        <button id="searchSubmit">Search for pattern</button>
+        <div id="searchResult"></div>
+
+        <script>
+            document.getElementById("searchSubmit").onclick=function() {
+
+                // 패턴 구하기(RegExp)
+                var pattern = document.getElementById("pattern").value;
+                var re = new RegExp(pattern, "g");
+
+                // 문자열 구하기
+                var searchString = document.getElementById("incoming").value;
+
+                // 치환하기
+                var resultString = searchString.replace(re, "<span class='found'>$&</span>");
+
+                // 페이지로 삽입
+                document.getElementById("searchResult").innerHTML = resultString;
+            };
+        </script>
+    </body>
+</html>
