@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="uft-8">
+        <title>
+            JS기본구성요소
+        </title>
+        <script> 
+
+            // ##01.자바스크립트 객체(object), 원시(primitive), 리터럴(literal) 구분하기
+            // 상보적 자바스크립트 객체 및 속성
+            var str1 = "이것은 간단한 문자열 입니다.";
+            console.log(str1.length);
+
+            // new 없이 변수 생성이 가능하다.
+            var str1 = String("이것은 간단한 문자열입니다."); // 원사 문자열
+            var num1 = Number(1.45); // 원시 숫자
+            var bool1 = Boolean(true); // 원시 boolean
+
+            // 객체를 신중하게 인스턴스화하려면 new 연산자 사용
+            var str2 = new String("이것은 간단한 문자열입니다."); // String 객체 인스턴스
+            var num2 = new Number(1.45); // Number 객체 인스턴스
+            var bool2 = new Boolean(true); // 원시 Boolean
+
+            // 완전 일치 연산자를 이용하여 
+            // 원시와 객체 인스턴스의 차이를 금방 알수 있다.
+            var str1 = String("string");
+            var num1 = Number(1.45);
+            var bool1 = Boolean(true);
+
+            if(str1 === "string") {
+                console.log('equal');
+            }
+
+            if(num1 === 1.45) {
+                console.log('equal');
+            }
+
+            if(bool1 === true) {
+                console.log('equal');
+            }
+
+            // 객체 인스턴스는 서로 일치하지 않는다.
+            // 왜냐하면 비교하고 있는 오른쪽 값은 
+            // 리터럴이기 때문이다.
+            var str2 = new String("string");
+            var num2 = new Number(1.45);
+            var bool2 = new Boolean(true);
+
+            if(str2 === "string") {
+                console.log('equal');
+            } else {
+                console.log('not equal');
+            }
+
+            if(num2 === 1.45) {
+                console.log('equal');
+            } else {
+                console.log('not equal');
+            }
+
+            if(bool2 === true) {
+                console.log('equal');
+            } else {
+                console.log('not equal');
+            }
+            
+            // 개발자들은 객체 인스턴스를 직접 생성하지 않는다.
+            // 그저 동작하는 숫자, 불리언, 문자열 변수만 있으면 된다.
+            // 중요한 것은 형(타입) 확인이나 완전 일치 연산자를 사용할 때 변수를 
+            // 객체로 정의하는 것보다는 변수가 그들이 원하는 데이터 유형과 일치하기를 바란다.
+            var num1 = 1.45;
+            var num2 = new Number(1.45);
+            console.log(typeof num1); // 숫자를 출력
+            console.log(typeof num2); // 객체를 출력
+            
+            // ##02.문자열에서 목록 추출하기
+            var sentence = 'This is one sentence. This is a sentence with a list of items:' + 
+            'cherries, oranges, apples, bananas. That was the list of items.';
+            var start = sentence.indexOf(':');
+            var end = sentence.indexOf('.', start + 1);
+
+            var listStr = sentence.substring(start+1, end); // start+1 부터 end전까지
+            // var listStr = sentence.substr(start+1, end-start);
+
+            var fruits = listStr.split(','); // , 기준으로 쪼갠다.
+            console.log(fruits); // ["cherries", " oranges", " apples", " bananas"]
+            
+            // forEach(1:배열의요소값 2:배열의요소인덱스 3:배열)
+            fruits.forEach(function(elmnt, indx, arry) {
+                arry[indx] = elmnt.trim();  // 공백제거
+            })
+
+            console.log(fruits);
+
+            // 정규표현식을 사용
+            var fruits = listStr.split(/\s*, \s*/);
+            console.log(fruits);
+
+            // 체이닝(chaining)을 사용한 코드 단순화
+            var fruits = sentence.substring(start+1, end).split(",");
+            console.log(fruits);
+
+            // ##04.문자열이 존재하는지, 빈 문자열인지 검사하기
+            // 가장 간단한 방법
+            if(typeof unkownVariable === 'string' && unkownVariable.length > 0) {
+                console.log('correct');
+            }
+            // 객체든 리터럴이든 상관없이 문자열을 테스트
+            if(((typeof unkownVariable != 'undefined' && unkownVariable) &&
+                unkownVariable.length() > 0) &&
+                typeof unkownVariable.valueOf() == 'string') {
+                    console.log('correct');
+            }
+            // 빈 문자열인지 테스트
+            var strFromFormElement = '';
+            if(strFromFormElement.length == 0) {
+                console.log('empty!');
+            } 
+
+            // 추가 : 동등연산자, 일치연산자
+            // 동등연산자(==, !=)
+            // 일치연산자(===, !==)
+            // 동등연산자를 사용하지 않는 이유?
+            // => 변수 객체보다는 원시 값을 주로 테스트하는데, 동등 연산자를 사용하면
+            //    테스트의 결과를 예측할 수 없기 때문이다.
+            var str1 = new String('test');
+            if(str1 == 'test') { console.log('동등'); }
+            if(str1 === 'test') { console.log('일치'); } 
+
+            var num = 0;
+            var str = '0';
+            console.log(num === str);   // false
+            console.log(num == str);    // true
+            console.log(num === Number(str));    // true
+            
+            var str = 'test';
+            var str2 = new String('test');
+            
+            doSomething(str);
+            doSomething(str2);
+
+            function doSomething(passedString) {
+                if(passedString == 'test') {
+                    console.log(typeof passedString);
+                }
+            }
+
+            // ##05. 패턴을 새 문자열로 대체하기
+            // String의 replace 매서드를 정규 표현식과 함께 사용하면 된다.
+            var searchString = "Now is the time, this is the tame";
+            var re = /t\w{2}e/g;    // g : 전역 플래그(해당하는 모든 문자열)
+            var replacement = searchString.replace(re, "place");
+            console.log(replacement);
+            
+            // ##06. 패턴의 모든 사례를 찾고 강조하기
+            var searchString = "Now is the time and this is the time and that is the time";
+            var pattern = /t\w*e/g; // t로 시작해 e로 끝나는 모든 문자열
+            var matchArray;
+
+            var str = "";
+
+            // Regexp 객체의 exec로 패턴 확인, null이 아니면 실행
+            // index : 일차하는 곳의 인덱스
+            // input :  초기 입력 문자열
+            // [0] : 일치한 값
+            // [1],...,[n]+:(있다면) 일치하는 괄호 부분 문자열
+            while((matchArray = pattern.exec(searchString)) != null) {
+                str += "at " + matchArray.index + " we found " + matchArray[0] + "\n";
+            }
+            console.log(str);
+
+            var re = /a(p+).*(pie)/g; // a로시작, p한번이상반복, newline제외모든문자0번이상반복, pie로 끝 
+            var result = re.exec("The apples in the apple pie are tart");
+            console.log(result);   
+            // ["apples in the apple pie", "pp", "pie"]
+            // 0:완벽히 일치하는 문장 
+            // 1,2:괄호 부분문장       
+            console.log(result.index);
+            console.log(result.input);
+        </script>
+    </head>
+    <body>
+        <h1 id="result"></h1>
+        <script>
+            // ##04.특수 문자 삽입하기
+            var resultString = "<p>This page \u00A9 Shelley Powers</p>";
+            // 페이지로 출력
+            var blk = document.getElementById("result");
+            blk.innerHTML = resultString;
+
+            var newString = 'You can\'t use single quotes ' + 
+                            'in a string surrounded by single quotes.' + 
+                            'Oh, wait a sec...yes you can.';
+        </script>
+    </body>
+</html>
