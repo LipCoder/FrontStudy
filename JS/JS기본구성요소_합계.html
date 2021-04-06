@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>테이블에서 숫자에 접근하기</title>
+    </head>
+
+    <body>
+        <table id="table1">
+            <tr>
+                <td>Washington</td><td>145</td>
+            </tr>
+            <tr>
+                <td>Oregon</td><td>233</td>
+            </tr>
+            <tr>
+                <td>Missouri</td><td>833</td>
+            </tr>
+        </table>
+        <script type="text/javascript">
+
+            var sum = 0;
+
+            // querySelector를 사용해 두 번째 테이블 셀 모두 찾기
+            var cells = document.querySelectorAll("td + td"); // td:nth-of-type(2)
+
+            for(var i = 0; i < cells.length; i++) 
+                sum+=parseFloat(cells[i].firstChild.data);
+            
+            // 더한 결과값을 테이블 끝에 넣기
+            var newRow = document.createElement("tr");
+
+            // 첫 번째 셀
+            var firstCell = document.createElement("td");   // td 태그를 만든다.
+            var firstCellText = document.createTextNode("Sum:");    // 텍스트 노드를 만든다.
+            firstCell.appendChild(firstCellText);           // 태그내에 텍스트를 삽입
+            newRow.appendChild(firstCell);                  // tr 태그 내에 td 태그 삽입
+
+            // 두 번째 셀에 합계 표시
+            var secondCell = document.createElement("td");
+            var secondCellText = document.createTextNode(sum);
+            secondCell.appendChild(secondCellText);
+            newRow.appendChild(secondCell);
+
+            // 테이블에 행 추가
+            document.getElementById("table1").appendChild(newRow);
+        </script>
+    </body>
+</html>

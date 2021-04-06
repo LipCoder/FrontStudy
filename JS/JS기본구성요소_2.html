@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script>
+            // ##12.10진수 값을 16진수 값으로 변환하기
+            var num = 255;
+
+            // 10진수 255와 동일한 16진수 ff 표시
+            console.log(num.toString(16));
+
+            var octoNumber = 0255; // 10진수 173
+            var hexaNumber = 0xad; // 10진수 173
+            
+            var decNum = 55;                    // 10진수 55
+            var octNum = decNum.toString(8);    // 8진수 67
+            var hexNum = decNum.toString(16);   // 16진수 37
+            var binNum = decNum.toString(2);    // 2진수 110111
+
+            // 스트릭트(strict) 모드
+            // ECMAScript5에 추가된 내용으로 좀 더 제한된 버전의 JS를 사용
+            // 다음 명령어로 시작
+            // (이 코드는 적용하려는 코드 블럭이나 함수의 첫 줄에 작성해야 한다.)
+            'use strict';
+            // 이 모드를 실행하면 보통 무시되었던 실수들이 에러를 발생하게 된다.
+            // 예상치 못한 결과나 설명할 수 없는 결과를 제거
+
+            // ##13.테이블에서 같은 열에 있는 숫자 모두 더하기
+            var sum = 0;
+
+            // querySelector를 사용하여 두 번째 테이블 셀 모두 찾기
+            var cells = document.querySelectorAll("td:nth-of-type(2)");
+            for(var i = 0; i < cells.length; i++) {
+                sum += parseFloat(cells[i].firstChild.data);
+            }
+
+            // ##14.각도와 라디안 변환
+            var radians = degrees * (Math.PI / 180);
+            var degrees = radians * (180 / Math.PI);
+
+            // ##15.페이지 요소안에 꼭 맞는 원의 반지름과 중심 구하기
+            // 반지름
+            var circleRadius = Math.min(elementWidth, elementHeight) / 2;
+            // 중심위치
+            var x = elementWidth / 2;
+            var y = elementHeight / 2;
+
+            // ##16.원호 길이 계산하기
+            // 호의 각도는 120도이고, 원의 반지름은 2
+            var radius = degrees * (Math.PI / 180);
+            var arclength = radians * radius; // value is 4.18879020478...
+
+            // ##17.ES 6의 기타 문자열 사용하기
+            var str = "Mockingbirds don't do one thing except make music " + 
+            "for us to enjoy. They don't eat up people's gardens, " +
+            "don't nest in corn cribs, " + 
+            "they don't do one thing but sing their hearts out for us. " + 
+            "That's why it's a sin to kill a mockingbird.";
+
+            console.log(str.startsWith("Mockingbirds")); // true
+            console.log(str.startsWith("autos", 20)); // false
+
+            console.log(str.endsWith("mockingbird.")); // true
+            console.log(str.endsWith("kill", str.length-15)); // true
+
+            var cp = str.codePointAt(50);   // 'f' = 102
+            var cp2 = str.codePointAt(51);  // 'o' = 111
+            var cp3 = str.codePointAt(52);  // 'r' = 114
+            var str2 = String.fromCodePoint(cp, cp2, cp3);
+
+            console.log(str.contains("gardens")); // true
+
+            var str2 = 'abc';
+            console.log(str2.repeat(2)); // abcabc
+            
+            console.log(str2);  // for
+        </script>
+    </head>
+
+    <body>
+        
+    </body>
+</html>

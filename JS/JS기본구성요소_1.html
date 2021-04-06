@@ -2,7 +2,7 @@
 <html>
     <head>
         <script>
-            // ##07. 캡처 괄호를 사용해 문자열의 단어 교환하기
+            // ##07.캡처 괄호를 사용해 문자열의 단어 교환하기
             var name = "Abe Lincoln";
             var re = /^(\w+)\s(\w+)$/;  // 입력값 시작과 끝, (모든 알파뱃 1자이상), 하나의 공백, (모든 알파뱃 1자이상)
             var newname = name.replace(re, "$2, $1");
@@ -10,7 +10,7 @@
 
             console.log(newname);
 
-            // ##08. HTML 태그를 명명된 엔티티로 치환하기
+            // ##08.HTML 태그를 명명된 엔티티로 치환하기
             var pieceOfHtml = "<p>This is a <span>paragraph</span></p>";
             pieceOfHtml = pieceOfHtml.replace(/</g, "&lt");
             pieceOfHtml = pieceOfHtml.replace(/>/g, "&gt");
@@ -19,6 +19,55 @@
             pieceOfHtml = pieceOfHtml.replace(/&lt/g, "<");
             pieceOfHtml = pieceOfHtml.replace(/&gt/g, ">");
             console.log(pieceOfHtml);
+
+            // ##09.ISO 8601 형식의 날짜를 Date 객체에 사용 가능한 형식으로 변환하기
+            var dtstr = "2014-3-04T19:35:32Z";
+
+            dtstr = dtstr.replace(/\D/g, " ");  // 숫자가 아닌 모든 문자를 공백으로 변경
+            var dtcomps = dtstr.split(" ");     // 공백 기준으로 쪼갬
+            // 2014 3 04 19 35 32
+
+            // ISO 8601 형식은 월이 1에서 시작하지만 Date는 0에서 시작하므로 월에서 1을 빼 수정함.
+            dtcomps[1]--;
+
+            // UTC() 메서드를 사용하여 세계 표준시의 날짜를 생성한 후, Date 생성자로 전달
+            var convdt = new Date(Date.UTC.apply(null, dtcomps));
+
+            console.log(convdt.toString());
+
+
+            // ##10.타이머와 함수 클로저 사용하기
+            // 익명함수 사용
+            // setInterval() => 주기적으로 실행
+            // setTimeout() => 한번만 실행
+            intervalId=setInterval( 
+                function() {
+                    x+=5;
+                    var left = x + "px";
+                    document.getElementById("redbox").style.left=left;
+                }, 100);
+            
+            // 함수 사용
+            function bing() {
+                alert("Bing!");
+            }
+
+            setTimeout(bing, 3000);
+            
+            
+            // ##11.경과 시간 구하기
+            var firstDate = new Date();
+
+            setTimeout(function() {
+                doEvent(firstDate);
+            }, 25000);
+
+            function doEvent() {
+                var secondDate = new Date();
+                // Date 객체 인스턴스는 뺄셈 연산만 가능하다.
+                var diff = secondDate - firstDate;
+                console.log(diff);  // approx. 25000
+            }
         </script>
     </head>
 
