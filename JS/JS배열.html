@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script>
+            // ##01.배열 검색하기
+            var animals = new Array("dog", "cat", "seal", "elephant", "walrus", "lion");
+            console.log(animals.indexOf("elephant"));   // 3을 출력
+            // 값을 검색할 수 없으면 -1
+
+            // ECMAScript5
+            var animals = new Array("dog", "cat", "seal", "walrus", "lion", "cat");
+            console.log(animals.indexOf("cat", 2));     // 5를 출력
+            console.log(animals.lastIndexOf("cat", 4)); // 1을 출력
+
+            // ECMAScript6
+            // 함수가 성공적으로 수행된 배열 요소를 배열 형태로 반환
+            var nums = [2, 4, 19, 15, 183, 6, 7, 1, 1];
+
+            var over = nums.findIndex(function(element) {
+                return (element >= 100);
+            });
+
+            console.log(nums[over]);
+
+        </script>
+    </head>
+
+    <body>
+    </body>
+</html>
