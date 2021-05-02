@@ -1,0 +1,35 @@
+# Arrow Functions
+
+- 코드를 더 쉽게 볼 수 있는 방법이다.
+
+- 믿음직한 코드를 짜게 해준다.
+
+- 좋게 보이지 않는 코드(arg내의 함수선언)를 바꿔준다.
+
+- 함수형 프로그래밍에서 나오게 된 강력한 형태
+
+
+# 'this' in Arrow Functions
+
+- Arrow Functions를 사용하지 말아야 할 경우가 딱 하나있다.
+=> 바로 this 키워드를 사용해야 하는 경우
+
+- Arrow function은 this를 이벤트로 부터 가지고 있지 않는다.
+=> this를 window object로 가지고 있는다.
+
+
+# Arrow Functions In The Real World
+
+- Arrow Function은 코드를 이쁘고 깔끔하게 보이게 해줌
+
+- callback 함수를 사용하는 기능을 쓸때 function을 쓴것 보다 휠씬 읽기 쉽게 해줌
+
+
+# Default Values
+
+- argument를 입력받는 function에 아무 값도 오지 않았을 경우?
+=> undefined가 안나오게 하려면 어떻게 해야 하는가?
+
+- Default Value를 사용하면 된다!!
+=> 값이 오지 않을 경우, 이미 세팅된 기본값을 가지고 함수가 호출된다.
+

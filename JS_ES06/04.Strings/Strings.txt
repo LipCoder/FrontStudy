@@ -1,0 +1,40 @@
+#Sexy Strings
+
+- template string 
+=> `` 를 사용 printf와 같은 역할을 한다.
+=> "", '' 는 줄 바꿈을 지원하지 않지만, ``는 지원한다.
+
+
+#HTML Fragments
+
+- ``를 사용하면 append나 createElement와 같은 과정 없이
+  원하는 HTML 태그들을 가독성 있게 추가할 수 있다. 
+
+- join(str)를 사용하면 배열에 있는 데이터를 str로 이어준다.
+
+
+#Cloning Styled Components
+
+- ``를 이용하여 ()가 없이도 함수를 호출할 수 있다.
+
+- 이와 ()를 이용해서 특정 태그의 스타일을 편집할 수 있다. 
+=> 이는 React에서도 쓰이는 방법이다.
+
+
+#Move String Improvements
+
+-4가지 String Method
+
+1. string.includes(arg) 
+=> string안에 arg가 포함되어 있는지 검사한다. 
+     포함되어 있으면 true 포함되지 않으면 false
+
+2. string.repeat(number)
+=> number 만큼 string을 반복하여 반환한다.
+
+3. string.startWith(arg)
+=> string 맨앞에 arg가 오는지 검사한다.
+    오면  true   다르면 false
+
+4. string.endsWith(arg)
+=> startWith랑 매커니즘은 비슷하지만 맨 뒤를 검사한다는 차이점이 있다.
