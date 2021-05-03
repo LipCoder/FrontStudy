@@ -1,0 +1,12 @@
+# Array.from() and Array.of()
+
+# Array.find(), Array.findIndex(), Array.fill()
+
+- find => 배열에 있는 데이터 중 원하는 것을 찾아준다.
+
+- findIndex => 배열에 있는 데이터 중 원하는 데이터를 찾아 위치를 알려준다.
+                    -1이 반환되면 값을 찾지 못했다는 뜻이다.
+
+- fill => array를 채우는 것이다.
+
+- includes => array에 해당 값이 있는지 검사한다. true 와 false 반환
