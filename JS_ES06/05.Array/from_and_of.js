@@ -9,11 +9,14 @@ console.log(friends);
 const buttons = document.getElementsByClassName("button");
 
 // Array가 아님
+// Array-like
+// HTMLCollection
 buttons.forEach(button => {
     button.addEventLIstener("click", () => {});
 });
 
-// Array-like
+// from을 사용하여 Array로 변환
+// Create an array from an array-like object
 Array.from(buttons).forEach(button => {
     button.addEventListener("click", () => {
         console.log("I ve been clicked");
