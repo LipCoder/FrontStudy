@@ -18,16 +18,17 @@ console.log(chosen_color);
 // 좀 별로인 방법...
 const chosenColor = settings.color.chosen_color || "light";
 
-// 세련된 방법
+// 1. 세련된 방법
 const {
     color: {chosen_color : chosenColor = "light"}
 } = settings;
 
 console.log(chosenColor);
 
-// 변수에 직접 집어넣기
+// 2. 변수에 직접 집어넣기
 let chosenColor = "blue";
 
+// 새 변수를 생성하는 대신...
 ({
     color: {chosen_color : chosenColor = "light"}
 } = settings);
