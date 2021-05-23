@@ -20,7 +20,7 @@ const getMoviesAsync = async() => {
     } catch (e) {
         console.log(`❌ ${e}`);
     } finally { // finally도 가능
-        console.log("We are done!");
+        console.log("We are done!"); 
     }
 
     

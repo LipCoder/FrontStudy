@@ -38,6 +38,8 @@ const uglyUser = new User();
 
 // object가 있는데 왜 class를 사용해야 하는가?
 // 인스턴스마다 다른 속성을 가질 수 있게 해주기 때문이다.
+// (Characteristic)
+// object를 찍어낼 수 있게 해주는 공장역할을 한다.
 
 class User {
     constructor(name) {
@@ -50,3 +52,6 @@ class User {
 
 const sexyUser = new User("Boem");
 const uglyUser = new User("Nicolas");
+
+sexyUser.sayHello();
+uglyUser.sayHello();
