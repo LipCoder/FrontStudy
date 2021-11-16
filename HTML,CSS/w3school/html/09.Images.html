@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Document</title>
+    <style>
+        body {
+            background-image: url('https://www.w3schools.com/html/img_girl.jpg');
+            background-repeat: repeat;
+            /* always covered to img */
+            background-attachment: fixed;
+            /* covered to img first time */
+            background-size: cover;
+            /* background-size: 100% 100%; */
+        }
+    </style>
+</head>
+<body>
+    <!-- Image Maps -->
+    <!-- <map> tag defines an image map -->
+    <!-- image map is an image with clickable areas. -->
+    <!-- areas are define with one or more <area> tags. -->
+    <img src="https://www.w3schools.com/html/workplace.jpg"
+     alt="Workplace" usemap="#workmap">
+
+    <map name="workmap">
+        <area shape="rect" coords="34,44,270,350" alt="Computer" href="https://www.w3schools.com/html/computer.htm">
+        <area shape="rect" coords="290,172,333,250" alt="Phone" href="https://www.w3schools.com/html/phone.htm">
+        <area shape="circle" coords="337,300,44" alt="Coffee" href="https://www.w3schools.com/html/computer.htm">      
+    </map>
+
+
+    <img src="https://www.w3schools.com/html/frenchfood.jpg"
+     alt="Bread" usemap="#bread">
+    
+    <map name="bread">
+        <area shape="poly" coords="140,121,181,116,204,160,204,222,191,270,140,329,85,355,58,352,37,322,40,259,103,161,128,147" href="https://www.w3schools.com/html/croissant.htm">
+    </map>
+</body>
+</html>
