@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var array = ['딸기우유', '바나나우유', '초코우유', '커피우유', '멜론우유'];
+
+        // for in 은 인덱스값을 순회돌면서 가지고 올 수 있다.
+        console.log('===== for .. in .. =====')
+        for(var index in array) {
+            console.log(index);
+        }
+
+        // for of 는 요소값을 순회돌면서 가지고 올 수 있다.
+        console.log('===== for .. of .. =====')
+        for(var element of array) {
+            console.log(element);
+        }
+
+    </script>
+</body>
+</html>
