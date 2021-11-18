@@ -122,7 +122,7 @@
 
 
         /* #7. 내장 함수 */
-        // 타이머 함수
+        // * 타이머 함수
         // setTimeout(function, millisecond) : 일정 시간 후 함수를 한 번 실행
         // setInterval(function, millisecond) : 일정 시간마다 함수를 반복하여 실행
         // clearTimeout(id) : setTimeout을 중지
@@ -130,7 +130,8 @@
 
         // 컴퓨터 자원을 계속 소비하기 때문에 사용하지 않는다면 타이머를 멈춘다.
 
-        // 인코딩과 디코딩 함수
+
+        // * 인코딩과 디코딩 함수
         // escape() : 적절한 정도로 인코딩
         // unescape() : 적절한 정도로 디코딩
         // encodeURI(uri) : 최소한의 문자만 인코딩
@@ -140,10 +141,57 @@
 
         // 인코딩은 문자를 컴퓨터에 저장하거나 통신에 사용할 목적으로 부호화 하는 방법이다.
         // 문자를 부호화 시키는 것으로, 이를 반대로 수행하는 경우는 디코딩이라고 한다.
+        
+
+        // * 숫자 확인함수 
+        // isFinite() : 값이 무한인지 확인
+        // isNaN() : 값이 NaN인지 확인 
 
 
-        // 숫자확인함수
+        // * 숫자 변환함수
+        // parseInt(string) : string을 정수로 변환
+        // parseFloat(string) : string을 유리수로 변환
+        // Number()가 일부 숫자 변환 불가 문자열이 포함된 경우 숫자로 변환하지 못하는 문제를
+        // 보완하고자 나옴
 
+        
+        /* 더 나아가기 */
+        // * 기본 매개변수
+        // 매개변수를 입력받지 않았을 경우 매개변수를 강제로 초기화 하는것을 기본 매개변수라고 한다.
+        // 매개변수에 undefined가 왔을 경우 해당 값을 함수 내부에서 초기화 시켜주도록 구성하면 된다.
+        function defaultParamTest(a, b, c) {
+            if(!b) {
+                b = 200;
+            }
+
+            if(!c) {
+                c = 100;
+            }
+
+            alert(a + ' : ' + b + ' : ' + c);
+        } 
+        // ECMAScript6 에서의 사용법
+        function defaultParamTestECMA6(a, b = 200, c = 100) {
+            alert(`${a} : ${b} : ${c}`);
+        } 
+
+        // * 전개연산자 - ECMA6
+        function test123(...numbers) {
+            alert(numbers[0]);
+            alert(numbers[1]);
+            alert(numbers[2]);
+
+        }
+
+        // 배열을 전개해서 매개변수로 전달
+        function test321(a, b, c, d) {
+            alert(`${a}:${b}:${c}:${d}`);
+        }
+        var array = [1, 2, 3, 4];
+        test321(...array);
+        var array2 = [1, 2];
+        test321(3, 4, ...array);
+        test321(...array, ...array);
 
     </script>
 </body>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /* DOM(Document Object Model) */
+        // Document Object(문서 객체) 
+        // HTML 에서 사용하는 태그를 자바 스크립트에서 이용할 수 있는 객체로 만든것 
+        // * 문서 가져오기 1
+        //var header = document.getElementById('header');
+        
+
+        // * 노드 생성
+        // createElement(tagName) : 요소 노드를 생성
+        // createTextNode(text) : 텍스트 노드 생성
+        var header = document.createElement('h1');
+        var textNode = document.createTextNode('Hello DOM');
+
+
+        // * 노드 연결
+        // appendChild(node) : 객체에 노드를 연결
+        header.appendChild(textNode);
+        document.body.appendChild(header);
+
+
+        // * 문서 객체 속성 지정
+        var img = document.createElement('img');
+        img.src = 'Penguins.jpg';
+        img.width = 500;
+        img.height = 350;
+        // setAttribute(name, value) : 객체의 속성을 지정
+        // getAttribute(name) : 객체의 속성을 가져옴
+
+
+        // * 태그 내에 문자 설정
+        // innerHTML
+        header.innerHTML = 'this is test';
+        header.innerHTML = `<h1 style="font-family:consolas;"> this is test </h1>`;
+
+
+        // * 문서 가져오기 2
+        // getElementsByName(name) : 태그 name 속성과 일치하는 문서 객체를 배열로 가져옴
+        // getElementsByTagName(tagName) : tagName과 일치하는 문서 객체를 배열로 가져옴
+
+
+        // * 문서 객체 배열에 for in 반복문을 사용하면 안되는 이유
+        // 문서 객체 이외의 속성에도 접근하려고 하기 때문이다.
+        // 문서 객체 배열에는 꼭 단순 for문을 사용하자. 
+
+
+        // * 문서 가져오기 3
+        // querySelector(선택자) : 선택자로 가장 처음 선택되는 문서 객체를 가져옴
+        // querySelectorAll(선택자) : 선택자와 맞는 모든 문서 객체를 가져옴
+
+
+        // * 문서 객체의 스타일 조작
+        var header = document.getElementById('header');
+
+        // 문서 객체의 스타일을 바꾼다.
+        header.style.border = '2px solid black';
+        header.style.color = 'orange';
+        header.style.fontFamily = 'helvetica';
+
+        
+        // * 문서 객체 제거
+        // removeChild(child) : 문서 객체의 자식 노드를 제거한다.
+        var willRemove = document.getElementById('will-remove');
+
+        // 문서 객체를 제거한다.
+        // 첫번째 방법 : 타깃 부모노드로 부터의 삭제
+        document.body.removeChild(willRemove);
+
+        // 두번째 방법 : 타깃 노드로 부터의 삭제
+        willRemove.parentNode.removeChild(willRemove);
+
+    </script>
+</body>
+</html>

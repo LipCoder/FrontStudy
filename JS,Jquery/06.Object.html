@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /* 객체 */
+        // 객체는 배열과 다르게 값을 찾기위해 인덱스가 아닌 키 값을 사용한다.
+        var obj = { 
+            name : 'kim',
+            country : 'japan',
+            age : 20
+        };
+
+        // 키값은 식별자(자료형)와 문자열 모두 사용할 수 있다.
+        // 식별자로 사용할 수 없는 단어를 키로 사용하는 경우 문자열 사용을 고려해 볼 수 있다.
+        var obj2 = { 
+            '1234' : 'test',
+            '!@#$' : 'test',
+            'a  b' :  1234
+        };
+
+        // 객체는 모든 형태의 자료형을 값으로 담을 수 있다. 
+        // 객체 속성 중 함수 자료형을 담은 경우 특별히 메서드라고 부른다.
+        var person = {
+            name: '윤인성',
+            eat : function (food) {
+                console.log(this.name + ' eat ' + food);
+            }
+        };
+        person.eat('noodle');
+
+
+        // * in 키워드
+        // in 키워드를 사용하면 해당 키가 객체 안에 있는지 확인 할 수 있다. 
+        console.log('name' in person);    // true
+        // 식별자, 문자열을 구분하기 때문에 주의해야 한다.
+        console.log(name in person);      // false
+
+
+        // * with 키워드 
+        // 복잡하게 사용해야 할 코드를 짧게 줄여준다.
+        var student = {
+            name: '연하진',
+            kor: 92, math: 98,
+            eng: 96, sc  : 98
+        };
+
+        var output = '';
+        with(student) {
+            output += '이름: ' + name + '\n';
+            output += '국어: ' + kor + '\n'; 
+            output += '수학: ' + math + '\n'; 
+            output += '영어: ' + eng + '\n'; 
+            output += '과학: ' + sc + '\n'; 
+            output += '총점: ' + (kor + math + eng + sc); 
+        }
+        console.log(output);
+        // 만약 객체 안에 output 키가 있는 경우
+        // with 키워드를 사용하면 충돌된다.
+        // 그렇기 때문에 with를 사용할때 window.output으로 사용해야 한다.
+
+
+        // * 속성 제거
+        // 동적으로 속성을 제거하는 것도 가능
+        delete(student.name);
+        console.log(student);
+
+
+        // * 옵션 객체 초기화
+        function init(options) {
+            options.val1 = options.val1 || 10;
+            console.log(options.val1);
+        };
+
+
+        // * 참조 복사 & 값 복사
+        // 값 복사 - 깊은 복사
+        // 값을 복사하고 다른 값에 영향을 주지 않음
+        var originVal = 10;
+        var newVal = originVal;
+
+        originVal = 273;
+
+        console.log(originVal);
+        console.log(newVal);
+
+        // 참조 복사 - 얕은 복사
+        // 값을 복사하고도 다른 값에 영향을 줌
+        // 해당 배열 값을 담은 주소인 참조값(주소값개념)을 복사했기 때문에
+        // 배열을 변경하면 그것을 참조하는 모든 변수들은 똑같이 출력된다.
+        var originArr = [1, 2, 3, 4];
+        var newArr = originArr;
+
+        originArr[0] = 234;
+
+        console.log(originArr);
+        console.log(newArr);
+        // 이러한 이유로...
+        // 객체나 배열을 어떻게 깊게 복사할 것인지는 굉장히 중요한 문제이다.
+
+        // 객체를 깊게 복사하기 위해서는 새로운 객체를 만들고 for in 반복문으로 
+        // 원복 객체에 반복을 돌리며 키와 값을 하나씩 옮기는 것이다.
+        function close(obj) {
+            var output = {};
+            for (var i in obj) {
+                putput[i] = obj[i];
+            }
+            return output;
+        }
+
+        // 전개 복사 (ECMA6)
+        const originArray = [1, 2, 3, 4, 5];
+        // 배열 복사
+        const newArray = [...originArray];
+    </script>
+    
+    
+</body>
+</html>

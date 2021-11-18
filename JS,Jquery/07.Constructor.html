@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /* 생성자 함수 */
+        // 타 언어의 Class 개념과는 다르다는 점에 유의하자
+        // Class 키워드는 ECMAScript6에서 지원한다.
+        // 생성자 함수는 new 키워드로 객체를 생성할 수 있다.
+        // 생성자 함수 생성
+        function Student(name, kor, math, eng, sc) {
+            // 속성
+            this.name = name;
+            this.kor = kor;
+            this.math = math;
+            this.eng = eng;
+            this.sc = sc;
+
+            // 매서드
+            this.getSum = function () {
+                return this.kor + this.math + this.eng + this.sc;
+            }
+
+            this.getAverage = function() {
+                return this.getSum() / 4;
+            }
+
+            this.toString = function() {
+                return this.name + '\t' + this.getSum() + '\t' + this.getAverage();
+            }
+        }
+        
+        // 객체 생성
+        var inputValue = [90, 80, 70, 60];
+        var student = new Student('홍길동', ...inputValue);
+        console.log(student.toString());
+        // new를 사용하지 않으면 Window 객체를 통한 작업으로 적용되어 실행되어진다.
+    
+    
+        // * 캡슐화
+        function Rectangle(w, h) {
+            // w, h를 캡슐화 하였음
+            var width = w;
+            var height = h;
+            
+            this.getWidth = function () { return width; };
+            this.getHeight = function() { return height; };
+            this.setWidth = function (w) {
+                if (w < 0) {
+                    throw '길이는 음수일 수 없음';
+                } else {
+                    width = w;
+                }
+            };
+
+            this.setHeight = function (h) {
+                if (h < 0) {
+                    throw '길이는 음수일 수 없음';
+                } else {
+                    height = h;
+                }
+            };
+        }
+
+        Rectangle.prototype.getArea = function() {
+            return this.getWidth() * this.getHeight();
+        }
+
+        var rectangle = new Rectangle(5, 7);
+        rectangle.setWidth(-2);
+
+        console.log(rectangle.getArea());    
+    </script>
+    <script>
+        // * 상속
+        // 생성자 함수를 선언한다.
+        function Square(length) {
+            this.base = Rectangle;
+            this.base(length, length);
+        }
+        
+        // 상속 받았기 때문에
+        // Rectangle이 할 수 있는 모든 일을 할 수 있다.
+        Square.prototype = Rectangle.prototype;
+        //Square.prototype.constructor = Square; 
+
+        // 활용
+        var square = new Square(5);
+        console.log(square.getArea());
+        // 상속 확인
+        console.log(square instanceof Rectangle);
+    </script>
+    <script>
+        /* Class (ECMA6) */
+        // 클래스 기반 객체지향    (C++, 자바, C#, python, ruby, Object-C, Swift)
+        // 프로토타입 기반 객체지향 (JS, Lua)
+
+        class RectangleNew {
+            // 생성자
+            constructor(width, height) {
+                this._width = width;
+                this._height = height;
+            }
+
+            // getter, setter
+            get width() {
+                return this._width;
+            }
+            set width(input) {
+                this._width = input;
+            }
+
+            get height() {
+                return this._height;
+            }
+            set height(input) {
+                this._height = input;
+            }
+
+            // 메서드
+            getArea() {
+                return this._width * this._height;
+            }
+        }
+
+        const rectangleNew = new RectangleNew(10, 10);
+        rectangleNew.width = 200;
+
+        console.log(rectangleNew.width);
+        console.log(rectangle.getArea());
+
+        // extends 사용 - 상속
+        class SquareNew extends RectangleNew {
+            constructor(length) {
+                // 부모 생성자
+                super(length, length);
+            }
+
+            set width(input) {
+                this._width = input;
+                this._height = input;
+            }
+
+            set height(input) {
+                this._width = input;
+                this._height = input;
+            }
+        }
+
+        const square = new Square(100);
+        alert(square.getArea());
+        
+        // 아직 JS 모듈 대부분이 생성자 함수를 사용하기 때문에
+        // 이를 잘 알아두는 것이 중요하다.
+        
+    </script>
+</body>
+</html>
