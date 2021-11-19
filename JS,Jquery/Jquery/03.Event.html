@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        .reverse {
+            background-color: black;
+            color: red;
+            font-family: 'Courier New', Courier, monospace;
+            font-weight: bold;
+            text-align: center;
+        }
+        .reverse2 {
+            background-color: blue;
+            color: pink;
+            font-family: 'Courier New', Courier, monospace;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        * { margin: 0px; padding: 0px; }
+
+        div {
+            margin: 5px; padding: 3px;
+            border: 3px solid black;
+            border-radius: 10px;
+        }
+    </style>
+
+    <script src="jquery-3.1.1.js"></script>
+    <script>
+        $(document).ready(function(event) {
+            // * 이벤트 연결 기본
+            // // on() : 이벤트를 연결한다.
+            // $('h1').on('click', function() {
+            //     $(this).html(function (index, html) {
+            //         return html + '+';
+            //     });
+            // });
+
+            // $('h1').on( {
+            //     mouseenter: function() {$(this).addClass('reverse');},
+            //     mouseleave: function() {$(this).removeClass('reverse');}
+            // });
+
+
+            // // * 간단한 이벤트 연결
+            // $('h1').hover(function() {
+            //     $(this).addClass('reverse2');
+            // }, function() {
+            //     $(this).removeClass('reverse2');
+            // });
+
+
+
+            // // * 이벤트 연결 제거
+            // // off() : 이벤트를 제거한다.
+            // // one() : 이벤트를 한 번만 연결한다.
+            // $('h1').off();
+            // //$('h1').one();
+
+            
+            // * 매개변수 context
+            // // context는 selector가 적용하는 범위를 한정한다. 
+            // // 일반적으로 이벤트와 함께 사용한다.
+            // $('div').click(function() {
+            //     var header = $('h1', this).text();
+            //     var paragraph = $('p', this).text();
+            //     // find로도 똑같이 사용가능
+            //     // var header = $(this).find('h1').text();
+
+            //     alert(header + " : " + paragraph);
+            // });
+
+
+            // * 이벤트 객체
+            var canvas = document.querySelector('canvas');
+            var context = canvas.getContext('2d');
+
+            $(canvas).on({
+                mousedown: function(event) {
+                    var pos = $(this).offset();
+                    var x = event.pageX - pos.left;
+                    var y = event.pageY - pos.top;
+
+                    context.beginPath();
+                    context.moveTo(x, y);
+                }, mouseup : function(event) {
+                    var pos = $(this).offset();
+                    var x = event.pageX - pos.left;
+                    var y = event.pageY - pos.top;
+
+                    context.lineTo(x, y);
+                    context.stroke();
+                }
+            });
+
+
+            // * 이벤트 강제 발생
+            // trigger() : 이벤트를 강제로 발생시킨다. 
+            // $('h1').click(function() {
+            //     $(this).html(function(index, html) {
+            //         return html + '⭐';
+            //     });
+            // });
+
+            // 1초마다 이벤트를 실행
+            // setInterval(function() {
+            //     $('h1').last().trigger('click');
+            // }, 1000);
+
+            // // trigger를 이용하면 인자값도 전달할 수 있다.
+            // $('h1').click( function(event, data1, data2) {
+            //     alert(event + ' => ' + data1 +  ' : ' + data2);
+            // });
+
+            // $('h1').eq(3).trigger('click', [273, 52]);
+
+
+            // * 기본 이벤트와 이벤트 전달
+            // 기존 JS는 return flase를 사용하면
+            // 기본 이벤트만 제거된다는 점에 주의해야 함.
+            // preventDefault() : 기본 이벤트를 제거
+            // stopPropragation() : 이벤트 전달을 제거
+
+
+            // * 이벤트 연결 범위 한정
+            // 이벤트를 연결하게 된다면, 이벤트가 연결된 DOM은 적용되지만
+            // 새로 생긴 태그는 이벤트가 적용되지 않는다.
+            // 이를 모두 적용시기키 위해서는 묶어서 이벤트의 범위를 한정해줘야 한다.
+            $('#wrap').on('click', 'h1', function() {
+                var length = $('h1').length;
+                var targetHTML = $(this).html();
+                $('#wrap').append('<h1>' + length + ' - ' + targetHTML + '</h1>');
+
+                // 이벤트 제거
+                $('#wrap').off('click', 'h1');
+            });
+        });
+    </script>
+</head>
+<body>
+    <!-- <h1>Header-0</h1>
+    <h1>Header-1</h1>
+    <h1>Header-2</h1> -->
+
+    <div>
+        <h1>Header 1</h1>
+        <p>Paragraph 1</p>
+    </div>
+    <div>
+        <h1>Header 2</h1>
+        <p>Paragraph 2</p>
+    </div>
+    <div>
+        <h1>Header 3</h1>
+        <p>Paragraph 3</p>
+    </div>
+
+    <canvas width="100" height="100"></canvas>
+
+
+    <h1>Start: </h1>
+    <h1>Start: </h1>
+
+
+    <div id="wrap">
+        <h1>Header</h1>
+    </div>
+
+</body>
+</html>

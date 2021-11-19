@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /* 예외처리 */
+        // 기본
+        function registerEventListener(node, event, listener) {
+            if(node.addEventListener) {
+                // 파폭, 크롬, 사파리, 오페라
+                node.addEventListener(event, listener, false);
+            } else if (node.attachEvent) {
+                // 익스플로러
+                node.attachEvent('on' + event, listener);
+            }
+        }
+
+        function whenClick(e) {
+            var event = window.event || e; // 예외처리
+            var willAlert = '';
+            alert(willAlert);
+        }
+
+        // 고급
+        try {
+            // 예외처리 되는 영역
+        } catch (exception) {
+            // 에러가 발생하여 넘어오는 영역
+        } finally {
+            // 에러 발생여부 상관없이 실행되는 영역 
+        }
+
+        // 예외 강제 발생
+        try {
+            throw 'CUSTOM EXCEPTION OCCUR';
+        } catch (exception) {
+            if(exception == 'CUSTOM EXCEPTION OCCUR') {
+                alert('ㅇㅁㅇ;');
+            }
+        }
+    </script>
+</body>
+</html>

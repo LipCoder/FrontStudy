@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script>
+        /* 이벤트 */
+        window.onload = function () {
+            document.getElementById('header').onclick = function (e) {
+                // alert(this); // HTMLHeadingElement
+                // this.style.color = 'orange';
+                // this.style.backgroundColor = 'red';
+
+                var event = e || window.event;
+
+                document.body.innerHTML = '';
+                for(var key in event) {
+                    document.body.innerHTML += '<p>' + key + ': ' + event[key] + '</p>';
+                }
+            };
+
+            //
+        };
+
+        // 디폴트 이벤트 제거
+        function whenSubmit() {
+            // 유효성 검사
+            return false;
+
+        }
+
+        // 이벤트 전달
+        
+    </script>
+    <style>
+        * { border: 3px solid black; }
+    </style>
+</head>
+<body>
+    <h1 id="header">Click</h1>
+    <!--  인라인 이벤트 모델 -->
+    <h1 onclick="alert('클릭')">Click</h1>
+    <form onsubmit="return whenSubmit()">
+        <!-- 생략 -->
+    </form>
+
+    <!-- 이벤트 버블링 -->
+    <!-- 안쪽에서 바깥쪽으로 흐른다. -->
+    <div onclick="alert('outer-div')">
+        <div onclick="alert('inner-div')">
+            <h1 onclick="alert('header')">
+                <p onclick="alert('paragraph')">Paragaraph</p>
+            </h1>
+        </div>
+    </div>
+
+    <!-- 이벤트 캡처링 -->
+    <!-- 이벤트 버블링 반대쪽으로 흐르는것 -->
+    <!-- 익스플로러는 지원하지 않기 때문에 절대 사용하지 않음 -->
+</body>
+</html>

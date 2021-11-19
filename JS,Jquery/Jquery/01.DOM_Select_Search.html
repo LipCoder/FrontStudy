@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="jquery-3.1.1.js"></script>
+</head>
+<body>
+    <h3>Header-0</h3>
+    <h3>Header-1</h3>
+    <h3>Header-2</h3>
+    <h3>Header-3</h3>
+    <h3>Header-4</h3>
+    <h3>Header-5</h3>
+
+    <hr>
+
+    <!-- <h1>Header-0</h1>
+    <h1>Header-1</h1>
+    <h1>Header-2</h1> -->
+
+    <hr>
+
+    <!-- <h1 class="select">Header-0</h1>
+    <h1>Header-1</h1>
+    <h1 class="select">Header-2</h1>
+    <h2>Header-3</h2>
+    <h1>Header-4</h1> -->
+        
+    <hr>
+
+    <span>비활성화</span>
+    <button>활성화하기</button>
+
+    <script>
+        $(document).ready(function() {
+            // * 기본 필터 메서드
+            // .filter(callback)
+            // 선택자로 부터 특정 조건을 만족하는 요소를 찾기위해 사용한다.
+            
+            $('h3').filter(function (index) {
+                return index % 2 == 0;
+            }).css({
+                backgroundColor: 'black',
+                color: 'white'
+            });
+            
+
+            // * 문서 객체 탐색 종료
+            // end() : 문서 객체 선택을 한 단계 뒤로 돌린다.
+            // $('h1').css('background', 'orange').filter(':even').css('color', 'white').end().
+            // filter(':odd').css('color', 'red');
+
+            // * 특정 위치의 문서 객체 선택
+            // eq() : 특정 위치에 존재하는 문서 객체를 선택
+            // first() : 첫 번째 위치하는 문서 객체 선택
+            // last() : 마지막에 위치하는 문서 객체 선택
+            // $('h1').eq(0).css('background', 'orange');
+            // $('h1').eq(-1).css('background', 'red');
+
+
+            // * 문서 객체 추가 선택
+            // add() : 문서 객체를 추가적으로 선택
+            // $('h1').css('background', 'Gray').add('h2').css('float', 'left');
+
+
+            // * 문서 객체의 특징 판별
+            // is() : 문서 객체의 특징을 판별
+            $('h1').each(function() {
+                if($(this).is('.select')) {
+                    $(this).css('background', 'orange');
+                }
+            })
+
+        });
+
+
+        // * 특정 태그 선택
+        // find() : 특정 태그를 선택
+        var xml = '';
+        xml += '<friends>';
+        xml += '    <friend>';
+        xml += '        <name>연하진</name>';
+        xml += '        <language>Ruby</language>';
+        xml += '    </friend>';
+        xml += '    <friend>';
+        xml += '        <name>윤명월</name>';
+        xml += '        <language>Basic</language>';
+        xml += '    </friend>';
+        xml += '    <friend>';
+        xml += '        <name>윤하린</name>';
+        xml += '        <language>C#</language>';
+        xml += '    </friend>';
+        xml += '</friends>';
+
+        $(document).ready(function() {
+            var xmlDoc = $.parseXML(xml);
+            alert($.toString(xmlDoc));
+            $(xmlDoc).find('friend').each(function(index) {
+                var output = '';
+                output += '<div>';
+                output += '     <h1>' + $(this).find('name').text() + '</h1>';
+                output += '     <p>' + $(this).find('language').text() + '</p>';
+                output += '</div>';
+                
+                document.body.innerHTML += output;
+            });
+        });
+
+
+        
+        $(document).ready(function(){
+            // * parent() 메서드
+            // 요소 대상의 부모
+            // parent()
+            $('button').click(function() {
+                $(this).text('비활성화');
+                // 자신의 부모
+                $(this).parent().css('background', 'red');
+                $(this).parent().find('span').text('활성화');
+            });
+        });
+        
+
+
+    </script>
+</body>
+</html>

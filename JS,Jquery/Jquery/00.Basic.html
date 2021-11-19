@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <!-- 
+        * CDN(Content Delivery Network)
+        콘텐츠를 효율적으로 전달하기 위해 전 세계 여러 지점의 서버에 파일을
+        저장해두고, 사용자와 가까운 지역에서 콘텐츠를 제공해주는 네트워크 시스템이다.
+        내가 경험한 사례 
+        ==> 리눅스 패키지 다운로드시 카카오나 네이버에서 제공하는 아카이브 서버를 이용하는 경우 
+    -->
+    <!-- CDN을 통해 불러오기 -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" 
+            integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" 
+            crossorigin="anonymous"></script>
+    <!-- SRI 해시(Subresource Integrity Hash) -->
+    <!-- 스크립트를 사용한 공격을 막기 위한 용도로 사용한다. -->
+    <!-- 여기서는 integrity와 crossorigin 속성이 SRI 해시를 사용한 것이다. -->
+    <!-- src에 있는 주소를 불러올때 해커가 피싱 사이트를 제공할 수 있다. -->
+    <!-- 이를 막기 위해 정말 src에 있는 사이트인지 검사하는 절차를 거치게 된다. -->
+
+    <!-- .min 파일은 스크립트 파일을 지핑(zipping)한 것이다. -->
+
+
+    <!-- 로컬 파일을 통해 불러오기 -->
+    <script src="jquery-3.1.1.js"></script>
+</head>
+<body>
+
+    <div>
+        <ul>
+            <li>Apple</li>
+            <li>Bag</li>
+            <li>Cat</li>
+            <li>Dog</li>
+            <li>Elephant</li>
+        </ul>
+
+        <input type="text" >
+        <input type="password" value="hi">
+        <input type="radio" >
+        <input type="checkbox" id="scales" value="Hack!">
+        <input type="file">
+
+        <br><br>
+        <select>
+            <option>Apple</option>
+            <option>Bag</option>
+            <option>Cat</option>
+            <option>Dog</option>
+            <option>Elephant</option>
+        </select>
+
+        <h1>item - 0</h1>
+        <h1>item - 1</h1>
+        <h1>item - 2</h1>
+        <h1>item - 3</h1>
+        <h1>item - 4</h1>
+
+    </div>
+
+
+
+
+    <script>
+        /* jQuery */
+        // Open Source Library
+        // 다음 기능을 위해 제작됐다.
+        // 1. DOM과 관련된 처리를 쉽게 구현
+        // 2. 이벤트 연결을 쉽게 구현
+        // 3. 시각 효과를 쉽게 구현
+        // 4. Ajax app을 쉽게 개발
+
+        // * document 객체의 ready 이벤트 연결
+        $(document).ready(function() {
+            // alert('First Init!!');
+        });
+        // window.onload와 동일한 역할을 하지만
+        // onload와는 다르게 (한 개이상) 여러 개의 함수를 연결할 수 있다.
+        $(document).ready(function() {
+            // alert('Second Init!!');
+        });
+
+        // $는 jquery의 식별자이다.
+        // window.jQuery = window.$ = jQuery
+
+
+        // * jQuery 기본 형태
+        // $([선택자]).[메서드]
+        // - 선택자
+        // 특정 id 속성을 가지는 태그 선택 : [tag]#[id]
+        // ex) h1#target
+        // <h1 id="target"></h1>
+
+        $(document).ready(function() {
+            // 자손 선택자
+            // body의 바로 아래 있는 자식들을 선택
+            $('body > *').css('color', 'red');
+
+            // 후손 선택자
+            // body의 아래에 있는 모든 자식들을 선택
+            $('body *').css('color', 'red');
+
+            // 속성 선택자
+            // 해당 태그의 속성이나 속성값을 선택하기 위한 선택자이다.
+            $('input[type="text"]').val('Hello jQuery..!');
+            $('input[value|="hi"]').val('GoodBye World..!');
+
+            // 필터 선택자
+            // selected : 선택된 태그를 선택한다.
+            setTimeout(function () {
+                var val = $('select > option:selected').val();
+                // alert(val);
+            }, 5000);
+
+            setInterval( function () {
+                $('input:focus').css('color', 'pink');
+
+                var checked = $('input[type="checkbox"]:checked');
+                var val = checked.val();
+                if(val != undefined) {
+                    //alert(val);
+                    checked.removeAttr('ckecked');
+                }
+            }, 10);
+
+           
+            // * 배열
+            // - 일반 배열
+            // ECMA5의 forEach와는 index, item 순서가 다르기 때문에 
+            // 이를 유의해야 한다.
+            var arr =  [10, 20, 30, 40, 50, 60, 70, 80, 90, 100];
+
+            $.each(arr, function(index, item) {
+                console.log(`[${index}] : ${item}`);
+            });
+
+            // - 요소 배열
+            $('h1').each(function (index, item) {
+                item.innerHTML = "This is jQuery Array Handling!!"
+                $(item).addClass('hing');
+            });
+
+
+            // * 객체 확장
+            // 정말 중요한 메서드...
+            // $.extend()
+            // 빈 객체를 생성하고 이후 새 속성을 추가
+            var object = { name: '김승범' };
+
+            $.extend(object, {
+                region: '서울특별시 강남구',
+                part: '세컨드 기타'
+            });
+
+            var output = '';
+            $.each(object, function(key, item) {
+                output += key + ': ' + item + '\n';
+            });
+            alert(output);
+
+
+            // * 충돌 방지
+            // noConflict를 쓰면 다른 라이브러리들과의 충돌을 막을 수 있다.
+            // 하지만 더이상 $를 이용하여 jquery를 쓸 수 없게 된다.
+            $.noConflict();
+            jQuery(document).ready(function () {
+
+            });
+        });
+
+    </script>
+</body>
+</html>

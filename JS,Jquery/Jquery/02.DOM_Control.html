@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="jquery-3.1.1.js"></script>
+</head>
+<body>
+    <h1 id="addClass">Hi~ This is heading for test addClass</h1>
+    <h1 id="removeClass" class="willRemove">Hi~ This is heading for test removeClass</h1>
+    
+    <h2 id="attr" style="background-color: red;">Hi~ This is heading for test attr</h2>
+    
+    <h1 id="innerTest">안녕 - 0</h1>
+    <h1 id="innerTest">안녕 - 1</h1>
+
+   <script>
+        $(document).ready(function() {
+            // * DOM 클래스 속성 추가, 삭제
+            $('h1#addClass').addClass('First');
+            $('h1#removeClass').removeClass('willRemove');
+
+
+            // * DOM 속성 조회, 추가, 삭제
+            var attrH2 = $('h2#attr').attr('style');
+            console.log(attrH2);
+
+            $('h2#attr').attr('title', 'add this by attr');
+            $('h2#attr').removeAttr('style');
+
+
+            // * style 속성 컨트롤
+            // $(selector).css()
+
+
+            // * DOM 내부 컨트롤
+            var value = $('h1#innerTest').html();
+            console.log(value);
+
+            value = $('h1#innerTest').text();
+            console.log(value);
+            // html과 text의 차이점은 
+            // html은 조건이 맞는 하나의 DOM에서 값을 가져오고
+            // text는 조건이 맞는 모든 DOM에서 값을 가져온다.
+
+            // - 내부 추가
+            $('h1').html('Replace By Jquery~! ');
+            $('h1').html(function(index, html) {
+                html += ' Add By Jquery~!';
+                return html;
+            });
+            // text로 추가하는 경우 태그는 인식하지 못한다.
+            // 하지만 html로 추가하는 경우 태그로 인식하여 
+            // 선택된 DOM의 자식 태그로 들어가게 된다.
+            $('h1').text('<h1>add h1</h1>');
+            // $('h1').html('<h1>add h1</h1>');
+
+            // - 내부 제거
+            $('h1').first().remove();   // 문서 객체 자체를 제거
+            //$('h1').first().empty();    // 문서 객체 내부를 제거
+
+
+            // * DOM 생성
+            $('<h1></h1>').html('Hello World .. !').appendTo('body');
+            // $('<h1>Hello World .. !</h1>').appendTo('body');
+
+            // - 속성 지정
+            $('<h2>What the hack?</h2>').attr('style', 'color:pink;').appendTo('body');
+            
+            // $(A).appendTo(B) : A를 B 뒷부분에 추가
+            // $(A).prependTo(B) : A를 B 앞부분에 추가
+            // $(A).insertAfter(B) : A를 B 뒷에 추가    
+            // $(A).insertBefore(B) : A를 B 앞에 추가
+
+            /*
+                  before()
+                -----------
+                  prepend()
+                    DOM
+                  append()
+                -----------
+                  after()
+            */
+            
+
+            // * DOM 복제
+            // clone을 사용하지 않으면
+            // 복제 되지 않고 기존 DOM이 해당 위치로 이동한다.
+            $('div').append($('h1').clone());
+        });
+    </script>
+</body>
+</html>
