@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /* 정규식 */
+        // 문자열의 패턴을 검사할때 사용
+        // 펄 프로그래밍 언어에서 사용한 객체로부터 시작됨
+        
+        // 자바스크립트에서는 두 가지 사용법이 존재함
+        // 보통 간단한 두번째 방법을 사용함
+        var regExp1 = new RegExp('text');
+        var regExp2 = /text/;
+
+        // 두가지 메서드가 존재함
+        // test() : 정규 표현식과 일치하는 문자열이 있으면 true, 아니면 false를 리턴
+        // exec() : 정규 표현식과 일치하는 문자열을 리턴
+        var regExp = /script/;
+        var string = 'Javascript jQuery Ajax';
+
+        var output1 = regExp.test(string);
+        var output2 = regExp.exec(string);
+
+        alert(output1);
+        alert(output2);
+
+
+        // 정규 표현식을 사용하는 String 객체의 메서드
+        // match(regExp) : 정규 표현식과 일치하는 부분을 리턴
+        // replace(regExp, replacement) : 정규 표현식과 일치하는 부분을 새로운 문자열로 변경
+        // search(regExp) : 정규 표현식과 일치하는 부분의 위치를 리턴
+        // split(regExp) : 정규 표현식을 기준으로 문자열을 잘라 배열를 리턴
+        var output3 = string.split(regExp);
+        alert(output3);
+
+
+        // 대체 문자
+        // $& : 일치하는 문자열
+        // $₩ : 일치하는 부분의 앞부분 문자열
+        // $' : 일치하는 부분의 뒷부분 문자열
+        // $1, $2, $3 : 그룹
+
+
+        // 플래그 문자
+        // g : 전역 비교를 수행
+        // i : 대소문자를 가리지 않고 비교
+        // m : 여러 줄의 검사를 수행
+        var regExp3 = /a/ig;
+        // a를 포함한 부분을 찾으며, 전역으로 비교하고, 대소문자를 가리지 않음
+
+        var output4 = string.replace(regExp3, '+$&+');
+        alert(output4);
+
+
+        // 앵커문자
+        // ^ABC : 맨 앞이 ABC
+        // ABC$ : 맨 뒤가 ABC
+
+
+        // 메타문자
+        // . : 아무 글자
+        // [abc] : 괄호 안에 글자
+        // [^abc] : 괄호 안에 글자 제외
+        // [a-z] : 알파벳 a부터 z까지
+        // [A-Z] : 알파벳 A부터 Z까지
+        // [0-9] : 숫자 0부터 9까지
+
+        // 메타문자 2
+        // \d : 숫자 
+        // \w : 아무 단어(숫자포함)
+        // \s : 공백 문자(탭, 띄어쓰기, 개행)
+        // \D : 숫자 아님
+        // \W : 아무 단어 아님
+        // \S : 공백 문자 아님
+        var regExpJuminNumber1 = /\d\d\d\d\d\d-[1234]\d\d\d\d\d\d/;
+
+
+        // 수량 문자
+        // a+ : a가 적어도 1개 이상
+        // a* : a가 0개 또는 여러 개
+        // a? : a가 0개 또는 1개
+        // a{5} : a가 5개
+        // a{2,5} : a가 2개~5개
+        // a{2,} : a가 2개 이상
+        // a{,2} : a가 2개 이하
+        var regExpJuminNumber2 = /\d{6}-[1234]\d{6}/;
+
+
+        // 선택 문자
+        // (abc|def) : abc 또는 def를 선택한다.
+
+
+        // 사용 예제
+        var koreanName = /(가-힣)/g;
+        var email = /\w+@\w+\.\w+/ // 글자@글자.글자
+        
+
+    </script>
+</body>
+</html>

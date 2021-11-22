@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /* 쿠키 */
+        // 쿠키는 키와 값이 들어 있는 작은 데이터 조각
+        // 서버와 클라이언트 모두 저장하고 사용할 수 있다.
+        // Name, Value, Domain, Path, Expires, Secure 항목을 조작할 수 있다.
+        document.cookie = 'Name=Value;Expires=날짜;Domain=도메인;Path=경로;Secure';
+        // Name=Value : 데이터를 저장하고 읽는 데 사용하는 속성
+        // Expires=날짜 : 쿠키의 파기 날짜(입력하지 않으면 브라우저 종료시 파기)
+        // Domain=도메인 : 해당 설정한 도메인이 다른 경우 쿠키 접근을 막음(입력하지 않으면 현재 경로로 자동 등록)
+        // Path=경로 : 쿠키가 저장되는 경로(?)
+        // Secure : 쿠키를 SSL로만 요청할 수 있도록 설정
+
+
+        // 쿠키 생성
+        var date = new Date();
+        date.setDate(date.getDate() + 7);
+
+        var willCookie = '';
+        willCookie += 'CookieName=Value;';
+        willCookie += 'expires=' + date.toUTCString();
+
+        document.cookie = willCookie;
+        console.log(document.cookie);
+        alert(document.cookie);
+
+
+        // 쿠키 제거
+        var date = new Date();
+        date.setDate(date.getDate() - 1);
+
+        var willCookie = '';
+        willCookie += 'CookieName=Value;';
+        willCookie += 'expires=' + date.toUTCString();
+
+        document.cookie = willCookie;
+        alert(document.cookie);
+
+
+         // 쿠키 5개 생성
+         var date = new Date();
+        date.setDate(date.getDate() - 1);
+
+        for(var i = 0; i < 5; i++) {
+            var willCookie = '';
+            willCookie += 'Name' + i + '=Value;';
+            willCookie += 'expires=' + date.toUTCString();
+
+            document.cookie = willCookie;
+        }
+
+        alert(document.cookie);
+
+
+        // 쿠키 정보 추출
+        var name = 'Name0';
+        var cookies = document.cookie.split(';');
+        alert(cookies);
+
+        for(var i in cookies) {
+            if(cookies[i].search(name) != -1) {
+                alert(cookies[i].replace(name='=', '')).replace(/^\s\s*/, '').replace(/\s\s*$/, '');
+            }
+        } 
+
+    </script>
+</body>
+</html>

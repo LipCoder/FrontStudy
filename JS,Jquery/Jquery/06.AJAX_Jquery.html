@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <!-- 
+        * CDN(Content Delivery Network)
+        콘텐츠를 효율적으로 전달하기 위해 전 세계 여러 지점의 서버에 파일을
+        저장해두고, 사용자와 가까운 지역에서 콘텐츠를 제공해주는 네트워크 시스템이다.
+        내가 경험한 사례 
+        ==> 리눅스 패키지 다운로드시 카카오나 네이버에서 제공하는 아카이브 서버를 이용하는 경우 
+    -->
+    <!-- CDN을 통해 불러오기 -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" 
+            integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" 
+            crossorigin="anonymous"></script>
+    <!-- SRI 해시(Subresource Integrity Hash) -->
+    <!-- 스크립트를 사용한 공격을 막기 위한 용도로 사용한다. -->
+    <!-- 여기서는 integrity와 crossorigin 속성이 SRI 해시를 사용한 것이다. -->
+    <!-- src에 있는 주소를 불러올때 해커가 피싱 사이트를 제공할 수 있다. -->
+    <!-- 이를 막기 위해 정말 src에 있는 사이트인지 검사하는 절차를 거치게 된다. -->
+
+    <!-- .min 파일은 스크립트 파일을 지핑(zipping)한 것이다. -->
+
+
+    <!-- 로컬 파일을 통해 불러오기 -->
+    <script src="jquery-3.1.1.js"></script>
+</head>
+<body>
+
+    <script>
+        $(document).ready(function() {
+            /* Jquery AJAX */
+            // 두가지 형태로 사용할 수 있다.
+            // $.ajax(options) 
+            // $.ajax(url, options)
+
+            // 1
+            $.ajax('/data.html', {
+                success: function(data) {
+                    console.log(data);
+                }
+            });
+
+            // 2
+            $.ajax({
+                url: '/data.html', 
+                success: function(data) {
+                    console.log(data);
+                }
+            });
+
+            // * 추가적인 jQeury Ajax 메서드
+            // $.get()              : get 방식으로 Ajax 수행
+            // $.post()             : post 방식으로 Ajax 수행
+            // $.getJSON()          : get 방식으로 Ajax 수행하고 JSON 데이터를 가져옴
+            // $.getScript()        : get 방식으로 Ajax 수행하고 Script 데이터를 가져옴
+            // $(selector).load()   : Ajax를 수행하고 선택자로 선택한 문서 객체 안에 집어넣음 
+
+
+            // * 데이터 요청 방식
+            // - get 요청
+            // 데이터 없이 그냥 요청
+            $('#get').click(function() {
+                $.ajax({
+                    url: '/products',
+                    type: 'get',
+                    dataType: 'text',
+                    success: function(data) {
+                        $('#output').val(data);
+                    }
+                });
+            });
+
+            // - post 요청
+            // 데이터를 담아서 요청
+            $('#post').click(function() {
+                $.ajax({
+                    url: '/products',
+                    type: 'post',
+                    dataType: 'text',
+                    data: {
+                        name: $('#name').val(),
+                        price: $('#price').val()
+                    },
+                    success: function(data) {
+                        $('#output').val(data);
+                    }
+                });
+            });
+            
+            // - put 요청
+            // 데이터 삽입 요청
+            $('#put').click(function() {
+                $.ajax({
+                    url: '/products/0',
+                    type: 'put',
+                    dataType: 'text',
+                    data: {
+                        name: $('#name').val(),
+                        price: $('#price').val()
+                    },
+                    success: function(data) {
+                        $('#output').val(data);
+                    }
+                });
+            });
+
+            // - delete 요청
+            // 데이터 삭제 요청
+            $('#delete').click(function() {
+                $.ajax({
+                    url: '/products/0',
+                    type: 'delete',
+                    dataType: 'text',
+                    success: function(data) {
+                        $('#output').val(data);
+                    }
+                });
+            });
+
+
+
+            // * 보조 메서드
+            // $.param() : 객체의 내용을 요청 매개변수 문자열로 만듬
+            // object ==> query string
+            // {name: 'kim', region: 'Seoul'} ==> name=kim&region=Seoul
+            var data = {name: 'kim', region: 'Seoul'};
+            alert($.param(data));
+            
+            // serialize(): 입력 양식의 내용을 요청 매개변수 문자열로 만듬
+            // name=kim&region=Seoul
+            alert($('#my_form').serialize());
+            
+            // serializeArray(): 입력 양식의 내용을 객체로 만듬
+            // 배열로 반환한다.
+            // [object Object], [object Object]
+            alert($('#my_form').serializeArray());
+
+
+
+            // * ajax 이벤트 연결 메서드
+            // ajaxComplete(function)   : Ajax 요청이 완료될 때 function을 실행
+            // ajaxError(function)      : Ajax 요청이 실패할 때 function을 실행
+            // ajaxSend(function)       : Ajax 요청이 보낼 때 function을 실행
+            // ajaxStart(function)      : Ajax 요청이 시작할 때 function을 실행
+            // ajaxStop(function)       : Ajax 요청이 중지할 때 function을 실행
+            // ajaxSuccess(function)    : Ajax 요청이 성공할 때 function을 실행
+            
+            // 이벤트 연결
+            $(document)
+            .ajaxComplete(function() { })
+            .ajaxError(function() { })
+            .ajaxSend(function() { })
+            .ajaxStart(function() { })
+            .ajaxStop(function() { })
+            .ajaxSuccess(function() { });
+
+            // Ajax 수행
+            $('#wrap').load('/data.json');
+
+        });
+
+    </script>
+</body>
+</html>

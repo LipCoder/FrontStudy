@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" id="key" />
+    <input type="text" id="value" />
+    <input id="btn" type="button" value="저장" />
+    <div id="output">
+
+
+    </div>
+
+    <script>
+        /* 저장소 */
+        // 로컬 저장소 : 웹 브라우저를 삭제하지 않는 이상 영구적으로 존재
+        // 세션 저장소 : 웹 브라우저가 종료될 때까지 데이터를 저장
+        // 로컬과 세션 저장소의 사용법은 동일함
+        window.onload = function() {
+            function printLocalStorage() {
+                document.querySelector('div').innerHTML = '';
+
+                for(var key in localStorage) {
+                    // appenChild
+                }
+            }
+
+            if(window.localStorage) {
+                // localStorage 객체의 메서드
+                // setItem(key, value) : 로컬 저장소에 데이터 생성
+                // getItem(key) : 로컬 저장소의 데이터를 가져옴
+                // removeItem(key) : 로컬 저장소의 데이터 삭제
+                // clear() : 로컬 저장소의 모든 데이터 삭제
+                // key(number) : 로컬 저장소의 특정 위치의 데이터를 읽음
+                
+                printLocalStorage();
+
+                var button = document.getElementById('btn');
+                button.addEventListener('click',function() {
+                    var key = document.getElementById('key').val;
+                    var value = document.getElementById('value').val;
+
+                    localStorage.setItem(key, value);
+
+                    printLocalStorage();
+                });
+            } else {    
+                alert('로컬 저장소를 사용할 수 없는 브라우저입니다.');
+            }
+        };
+    </script>
+</body>
+</html>

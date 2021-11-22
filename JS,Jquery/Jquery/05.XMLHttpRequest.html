@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /* XMLHttpRequest */
+        // XMLHttpRequest는 빈 편지지와 같다. 
+        // 수취인, 배송방식, 내용 등을 넣을 수 있다.
+
+        // open(<전송방식>, <경로>, <비동기 사용 여부>);
+        // 동기 - 올때까지 우체통 앞에서 대기
+        // 비동기 - 올때까지 다른걸 하다가 신호가 오면 받기
+        // 편지지의 전송 위치와 방식을 설정한다.
+        var request = new XMLHttpRequest();
+        request.open('GET', '/data.html', false);
+
+        // Ajax를 수행한다.
+        request.send();
+
+        // 결과를 출력한다.
+        console.log(request.responseText);
+
+
+        // * JSON 요청과 조작
+        request.onreadystatechange = function(event) {
+            if(request.readyState == 4) {
+                if(request.status == 200) {
+                    // 데이터를 가공
+                    var json = eval('(' + request.responseText + ')');
+                    // JSON 객체로 가공이 가능하다.
+                    // var json = JSON.parse(request.responseText);
+                    // 하지만 이 경우 익스플로러에서 사용할 수 없다.
+
+                    for(var key in json[i]) {
+                        console.log(`${key} : ${json[i][key]}`);
+                    }
+
+                }
+            }
+        }
+
+
+         // * XML 요청과 조작
+         request.onreadystatechange = function(event) {
+            if(request.readyState == 4) {
+                if(request.status == 200) {
+                    // 데이터를 가공
+                    var xml = request.responseXML;
+
+                    // 데이터 가공
+                    var obj1s = xml.getElementsByTagName('obj1');
+                    var obj2s = xml.getElementsByTagName('obj2');
+
+                    for(var i in obj1s) {
+                        console.log(`${i} : ${obj1s[i]}`);
+                    }
+                    for(var i in obj2s) {
+                        console.log(`${i} : ${obj2s[i]}`);
+                    }
+                }
+            }
+        }
+
+    </script>
+</body>
+</html>
